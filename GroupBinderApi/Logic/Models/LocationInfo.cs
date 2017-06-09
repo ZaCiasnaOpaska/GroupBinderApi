@@ -14,6 +14,7 @@ namespace GroupBinderApi.Logic.Models
         public string Name { get; }
         public double Lat { get; }
         public double Lng { get; }
+        public bool IsLost { get; set; }
 
         public LocationInfo(string phone, double lat, double lng)
         {

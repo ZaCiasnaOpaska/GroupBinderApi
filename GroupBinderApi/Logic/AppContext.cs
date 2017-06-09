@@ -21,20 +21,10 @@ namespace GroupBinderApi.Logic
             Context.LocalizationInfos.Add(info);
         }
 
-        public static IEnumerable<LocationInfo> GetLostPeople()
-        {
-            var lostPeopleInfos = Context.LocalizationInfos
-                .Where(x => Context.LostPeopleNumbers.Contains(x.Phone));
-
-            return lostPeopleInfos;
-        }
-
         public static void AddLostUser(string phone)
         {
-            if (Context.LostPeopleNumbers.Contains(phone))
-                return;
-
-            Context.LostPeopleNumbers.Add(phone);
+            var info = Context.LocalizationInfos.First(x => x.Phone == phone);
+            info.IsLost = true;
         }
     }
 }

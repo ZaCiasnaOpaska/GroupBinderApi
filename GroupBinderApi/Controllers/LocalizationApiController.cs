@@ -21,12 +21,6 @@ namespace GroupBinderApi.Controllers
             AppContext.SaveUserLocation(request.Phone, request.Lat, request.Lng);
         }
 
-        [Route("api/localization/lostPeople")]
-        public IEnumerable<LocationInfo> GetLostPeople()
-        {
-            return AppContext.GetLostPeople();
-        }
-
         [HttpPost]
         [Route("api/localization/imLost")]
         public void ImLost(ImLostRequestModel request)

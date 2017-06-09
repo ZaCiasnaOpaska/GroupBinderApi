@@ -24,6 +24,7 @@
             zoom: 13,
             center: mickiewicza
         });
+
         getJson("/api/localization/getAll", function(localizationInfos) {
             for (let info of localizationInfos) {
                 let position = { lat: info.lat, lng: info.lng };
@@ -34,6 +35,10 @@
                 });
             }
         });
+
+        setInterval(function() {
+                
+            }, 1000);
     }
 </script>
 <script async defer
