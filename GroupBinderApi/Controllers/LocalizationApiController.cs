@@ -13,7 +13,8 @@ namespace GroupBinderApi.Controllers
         {
             _localizationService = new LocalizationService();
         }
-
+        
+        [Route("api/localizations/getAll")]
         public IEnumerable<LocalizationInfo> GetAll()
         {
             var infos = _localizationService.GetAllLocalizations();

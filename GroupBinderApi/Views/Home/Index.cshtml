@@ -4,25 +4,21 @@
 <div id="map"></div>
 <script>
     function initMap() {
-        var mickiewicza = { lat: 54.3827261, lng: 18.6239686 };
-        var eti = { lat: 54.3738065, lng: 18.6129093 };
-        var map = new google.maps.Map(document.getElementById('map'), {
+        var mickiewicza = { lat: 54.3827261, lng: 18.6239686 }; 
+        let map = new google.maps.Map(document.getElementById('map'), {
             zoom: 13,
             center: mickiewicza
         });
-        var markerMickiewicza = new google.maps.Marker({
-            position: mickiewicza,
-            map: map,
-            label: "Konrad"
-    });
-
-        setTimeout(function() {
-                var markerEti = new google.maps.Marker({
-                    position: eti,
-                    map: map
+        $.getJSON("/api/localizations/getAll", function(localizationInfos) {
+            for (let info of localizationInfos) {
+                let position = { lat: info.lat, lng: info.lng };
+                let marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    label: info.name
                 });
-            },
-            2000);
+            }
+        });
     }
 </script>
 <script async defer
@@ -33,4 +29,5 @@
 @section Scripts{
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/jquery")
 }

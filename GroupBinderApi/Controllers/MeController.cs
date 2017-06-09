@@ -30,8 +30,11 @@ namespace GroupBinderApi.Controllers
 
         public ApplicationUserManager UserManager
         {
-            get => _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            private set => _userManager = value;
+            get
+            {
+                return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set { _userManager = value; }
         }
 
         // GET api/Me
