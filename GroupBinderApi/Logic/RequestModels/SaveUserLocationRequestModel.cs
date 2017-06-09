@@ -1,11 +1,9 @@
-﻿namespace GroupBinderApi.Logic.Models
+﻿namespace GroupBinderApi.Logic.RequestModels
 {
-    public class LocalizationInfo
+    public class SaveUserLocationRequestModel
     {
         public string Phone { get; set; }
-        public string Name { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
-
     }
 }

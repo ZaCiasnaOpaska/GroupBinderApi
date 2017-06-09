@@ -24,7 +24,7 @@
             zoom: 13,
             center: mickiewicza
         });
-        getJson("/api/localizations/getAll", function(localizationInfos) {
+        getJson("/api/localization/getAll", function(localizationInfos) {
             for (let info of localizationInfos) {
                 let position = { lat: info.lat, lng: info.lng };
                 let marker = new google.maps.Marker({

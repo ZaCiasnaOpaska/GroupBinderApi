@@ -1,32 +1,37 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using GroupBinderApi.Logic.Helpers;
+using GroupBinderApi.Logic;
 using GroupBinderApi.Logic.Models;
-using GroupBinderApi.Logic.Services;
+using GroupBinderApi.Logic.RequestModels;
 
 namespace GroupBinderApi.Controllers
 {
     public class LocalizationApiController : ApiController
     {
-        private readonly LocalizationService _localizationService;
-
-        public LocalizationApiController()
+        [Route("api/localization/getAll")]
+        public IEnumerable<LocationInfo> GetAll()
         {
-            _localizationService = new LocalizationService();
-        }
-        
-        [Route("api/localizations/getAll")]
-        public IEnumerable<LocalizationInfo> GetAll()
-        {
-            var infos = _localizationService.GetAllLocalizations();
-
-            return infos;
+            return AppContext.GetAllUsers();
         }
 
         [HttpPost]
-        public void SaveUserLocation(LocalizationInfo info)
+        [Route("api/localization/saveUserLocation")]
+        public void SaveUserLocation(SaveUserLocationRequestModel request)
         {
-            AppContext.SaveUserLocation(info);
+            AppContext.SaveUserLocation(request.Phone, request.Lat, request.Lng);
+        }
+
+        [Route("api/localization/lostPeople")]
+        public IEnumerable<LocationInfo> GetLostPeople()
+        {
+            return AppContext.GetLostPeople();
+        }
+
+        [HttpPost]
+        [Route("api/localization/imLost")]
+        public void ImLost(ImLostRequestModel request)
+        {
+            AppContext.AddLostUser(request.Phone);
         }
     }
 }

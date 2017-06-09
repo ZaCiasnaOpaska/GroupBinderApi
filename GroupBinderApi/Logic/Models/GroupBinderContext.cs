@@ -4,6 +4,7 @@ namespace GroupBinderApi.Logic.Models
 {
     public class GroupBinderContext
     {
-        public List<LocalizationInfo> LocalizationInfos { get; set; } = new List<LocalizationInfo>();
+        public List<LocationInfo> LocalizationInfos { get; } = new List<LocationInfo>();
+        public List<string> LostPeopleNumbers { get; } = new List<string>();
     }
 }
