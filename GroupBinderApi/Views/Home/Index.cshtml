@@ -1,0 +1,36 @@
+﻿<!-- ko with: home -->
+
+<h3>My Google Maps Demo</h3>
+<div id="map"></div>
+<script>
+    function initMap() {
+        var mickiewicza = { lat: 54.3827261, lng: 18.6239686 };
+        var eti = { lat: 54.3738065, lng: 18.6129093 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: mickiewicza
+        });
+        var markerMickiewicza = new google.maps.Marker({
+            position: mickiewicza,
+            map: map,
+            label: "Konrad"
+    });
+
+        setTimeout(function() {
+                var markerEti = new google.maps.Marker({
+                    position: eti,
+                    map: map
+                });
+            },
+            2000);
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNjplVWTZSwn6LkuX_DKNdMzfgbxPZjIA&callback=initMap">
+</script>
+
+<!-- /ko -->
+@section Scripts{
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/app")
+}
