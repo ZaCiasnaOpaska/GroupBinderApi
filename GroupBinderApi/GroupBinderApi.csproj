@@ -244,6 +244,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Helpers\AppContext.cs" />
+    <Compile Include="Logic\Models\GroupBinderContext.cs" />
     <Compile Include="Logic\Models\LocalizationInfo.cs" />
     <Compile Include="Logic\Services\LocalizationService.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

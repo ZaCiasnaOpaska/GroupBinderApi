@@ -3,13 +3,28 @@
 <h3>My Google Maps Demo</h3>
 <div id="map"></div>
 <script>
+    function getJson(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = function() {
+            var status = xhr.status;
+            if (status == 200) {
+                callback(xhr.response);
+            } else {
+                console.log("eror");
+            }
+        };
+        xhr.send();
+    }
+
     function initMap() {
         var mickiewicza = { lat: 54.3827261, lng: 18.6239686 }; 
         let map = new google.maps.Map(document.getElementById('map'), {
             zoom: 13,
             center: mickiewicza
         });
-        $.getJSON("/api/localizations/getAll", function(localizationInfos) {
+        getJson("/api/localizations/getAll", function(localizationInfos) {
             for (let info of localizationInfos) {
                 let position = { lat: info.lat, lng: info.lng };
                 let marker = new google.maps.Marker({
@@ -29,5 +44,4 @@
 @section Scripts{
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/app")
-    @Scripts.Render("~/bundles/jquery")
 }
