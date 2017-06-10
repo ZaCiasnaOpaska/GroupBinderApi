@@ -25,20 +25,25 @@
             center: mickiewicza
         });
 
-        getJson("/api/localization/getAll", function(localizationInfos) {
-            for (let info of localizationInfos) {
-                let position = { lat: info.lat, lng: info.lng };
-                let marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    label: info.name
-                });
-            }
-        });
+        let markers = [];
 
         setInterval(function() {
-                
-            }, 1000);
+            getJson("/api/localization/getAll", function (localizationInfos) {
+                for (let marker of markers) {
+                    marker.setMap(null);
+                }
+                markers = [];
+                for (let info of localizationInfos) {
+                    let position = { lat: info.lat, lng: info.lng };
+                    let marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        label: info.name
+                    });
+                    markers.push(marker);
+                }
+            });
+            }, 2000);
     }
 </script>
 <script async defer
