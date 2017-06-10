@@ -20,13 +20,7 @@ namespace GroupBinderApi
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             HttpContext.Current.Application["GroupBinderContext"] = new GroupBinderContext();
-            InitializeWithFakeUsers();
-        }
-
-        private static void InitializeWithFakeUsers()
-        {
-            AppContext.SaveUserLocation("691608245", 54.3827261, 18.6239686);
-            AppContext.SaveUserLocation("531621685", 54.3738065, 18.6129093);
+            AppContext.InitializeWithFakeUsers();
         }
     }
 }
