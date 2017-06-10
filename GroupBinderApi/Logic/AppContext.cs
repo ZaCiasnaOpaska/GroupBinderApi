@@ -15,25 +15,38 @@ namespace GroupBinderApi.Logic
 
         public static IEnumerable<LocationInfo> GetAllUsers()
         {
-            return Context.LocalizationInfos;
+            var infos = Context.LocalizationInfos;
+            var user = infos.First(x => x.Phone == "531621685");
+
+            if (user.Lat < 54.3746065)
+            {
+                user.Lat += 0.0001;
+                CheckIfDistant(user);
+            }
+            return infos;
         }
 
         public static void SaveUserLocation(string phone, double lat, double lng)
         {
             var info = new LocationInfo(phone, lat, lng);
             
-            var geoCoords = new GeoCoordinate(lat, lng);
+            CheckIfDistant(info);
+
+            Context.LocalizationInfos.RemoveAll(x => x.Phone == phone);
+            Context.LocalizationInfos.Add(info);
+        }
+
+        private static void CheckIfDistant(LocationInfo info)
+        {
+            var geoCoords = new GeoCoordinate(info.Lat, info.Lng);
             var distantFromHowManyUsers = Context.LocalizationInfos
-                .Where(x => x.Phone != phone)
+                .Where(x => x.Phone != info.Phone)
                 .Select(x => new GeoCoordinate(x.Lat, x.Lng))
                 .Count(x => x.GetDistanceTo(geoCoords) > DistanceWhenUserShouldBeAlarmed);
             if (distantFromHowManyUsers > 0.75 * Context.LocalizationInfos.Count)
             {
                 info.IsDistant = true;
             }
-
-            Context.LocalizationInfos.RemoveAll(x => x.Phone == phone);
-            Context.LocalizationInfos.Add(info);
         }
 
         public static void AddLostUser(string phone)
@@ -46,7 +59,7 @@ namespace GroupBinderApi.Logic
         {
             Context.LocalizationInfos.Add(new LocationInfo("531621685", 54.3738065, 18.6129093));
             Context.LocalizationInfos.Add(new LocationInfo("123123123", 54.3733065, 18.6129093));
-            Context.LocalizationInfos.Add(new LocationInfo("456456456", 54.3745065, 18.6126093));
+            Context.LocalizationInfos.Add(new LocationInfo("456456456", 54.3738065, 18.6126093));
             Context.LocalizationInfos.Add(new LocationInfo("789789789", 54.3738065, 18.6124093));
             Context.LocalizationInfos.Add(new LocationInfo("111111111", 54.3738065, 18.6132093));
             Context.LocalizationInfos.Add(new LocationInfo("222222222", 54.3736065, 18.6127093));

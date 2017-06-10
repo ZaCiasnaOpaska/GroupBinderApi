@@ -39,3 +39,29 @@ textarea {
     height: 600px;
     width: 100%;
 }
+.app-icon {
+    float: left;
+    width: 96px;
+    height: 96px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.marker-image {
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+h1 {
+    line-height: 150%;
+}
+h2 {
+    margin-left: 40px;
+}
+.map-legend {
+    padding: 10px 10px 20px 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: cadetblue;
+    display: block;
+}

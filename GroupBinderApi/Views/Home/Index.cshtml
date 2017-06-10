@@ -1,7 +1,48 @@
-﻿<!-- ko with: home -->
+﻿@{
+    Layout = null;
+}
 
-<h3>My Google Maps Demo</h3>
-<div id="map"></div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+
+<body>
+@*<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>*@
+<div class="container body-content">
+    
+
+    <!-- ko with: home -->
+    <img class="app-icon" src="/Content/Images/ico.png" />
+    <h1> Group Binder</h1>
+    <div id="map"></div>
+
 <script>
     function getJson(url, callback) {
         var xhr = new XMLHttpRequest();
@@ -19,7 +60,7 @@
     }
 
     function initMap() {
-        var center = { lat: 54.3738065, lng: 18.6124093 }; 
+        var center = { lat: 54.3739065, lng: 18.6124093 }; 
         let map = new google.maps.Map(document.getElementById('map'), {
             zoom: 18,
             center: center
@@ -59,8 +100,26 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNjplVWTZSwn6LkuX_DKNdMzfgbxPZjIA&callback=initMap">
 </script>
 
-<!-- /ko -->
-@section Scripts{
-    @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/bundles/app")
-}
+    <!-- /ko -->
+    <h2 style="color: blue">LEGEND:</h2>
+    <div class="map-legend">
+        <img class="marker-image" src="Content/Images/standardMarker.png"/>
+        <h2>- standard marker</h2><br/>
+        <img class="marker-image" src="Content/Images/distantMarker.png"/>
+        <h2>- distant marker</h2><br/>
+        <img class="marker-image" src="Content/Images/lostMarker.png"/>
+        <h2>- lost marker</h2><br/>
+
+    </div>
+
+    <hr />
+    <footer>
+        <p>&copy; ZaCiasnaOpaska - Hackathon 2017</p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/knockout")
+@Scripts.Render("~/bundles/app")
+</body>
+</html>
