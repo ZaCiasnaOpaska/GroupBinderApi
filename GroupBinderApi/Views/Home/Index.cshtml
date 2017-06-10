@@ -35,10 +35,17 @@
                 markers = [];
                 for (let info of localizationInfos) {
                     let position = { lat: info.lat, lng: info.lng };
+                    let icon = "/Content/Images/";
+                    if (info.isLost) {
+                        icon += "lostMarker.png";
+                    } else {
+                        icon += "standardMarker.png";
+                    }
                     let marker = new google.maps.Marker({
                         position: position,
                         map: map,
-                        label: info.name
+                        label: info.name,
+                        icon: icon
                     });
                     markers.push(marker);
                 }
